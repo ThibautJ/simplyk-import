@@ -14,6 +14,8 @@ block footscript
 		$(document).ready(function(){
 			$('#execute').click(function(){
 				const path = $('#path').val();
+				console.log('Puet');
+				console.log(Date.parse(' 2002-12-10'));
 				$.get('/import_students', {path: path}, function(){
 					console.log('IN GET with path : ' + path);
 				});
