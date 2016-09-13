@@ -1,0 +1,27 @@
+{
+  "name": "simplyk-import",
+  "version": "1.0.0",
+  "description": "Students and employees importation to Simplyk Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThibautJ/simplyk-import.git"
+  },
+  "keywords": [
+    "volunteering"
+  ],
+  "author": "ThibautJ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThibautJ/simplyk-import/issues"
+  },
+  "homepage": "https://github.com/ThibautJ/simplyk-import#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0"
+  }
+}
