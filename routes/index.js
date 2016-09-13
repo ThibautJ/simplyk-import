@@ -10,11 +10,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/import_students', function(req, res) {
-	reader.readFile('tests/data-sub.txt', 'utf8', function(err, file) {
+	reader.readFile('datas/' + req.query.path, 'utf8', function(err, file) {
 		if (err) {
 			console.log(err);
 		} else {
-			console.log('Finished OK');
+			console.log('Finished OK with path ' + req.query.path);
 		}
 	})
 })

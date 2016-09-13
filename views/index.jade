@@ -6,12 +6,16 @@ block content
 		.row
 			div.col-md-5.col-md-1-offset
 				h2 Add a school
+				input#path(placeholder='folder/file name in datas folder')
 				a#execute.btn.btn-default Exécute script
 
 block footscript
 	script.
 		$(document).ready(function(){
 			$('#execute').click(function(){
-				$.get('/import_students', function(){})
-			})
-		})
+				const path = $('#path').val();
+				$.get('/import_students', {path: path}, function(){
+					console.log('IN GET with path : ' + path);
+				});
+			});
+		});
