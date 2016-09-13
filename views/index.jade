@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	h1 SUPER-ADMIN
+	.container-fluid
+		.row
+			div.col-md-5.col-md-1-offset
+				h2 Add a school
+				a#execute.btn.btn-default Exécute script
+
+block footscript
+	script.
+		$(document).ready(function(){
+			$('#execute').click(function(){
+				$.get('/import_students', function(){})
+			})
+		})

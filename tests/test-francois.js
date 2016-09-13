@@ -6,17 +6,30 @@ var mongoose = require('mongoose');
 
 var Volunteer = require('../models/volunteer_model.js');
 
-
-fs.readFile('tests/data-sub.txt', 'utf8', function(err,file){
-	if(err){
+/*
+fs.readFile('tests/data-sub.txt', 'utf8', function(err, file) {
+	if (err) {
 		console.log(err);
-	}
-	else{
+	} else {
 		// console.log(file);
 		const allText = file;
 		processData(allText);
 	}
-});
+});*/
+
+function readFile(path, encoding, callback) {
+	fs.readFile(path, encoding, function(err, file) {
+		if (err) {
+			console.log(err);
+			return callback(err, null);
+		} else {
+			// console.log(file);
+			const allText = file;
+			processData(allText);
+			return callback(null, file);
+		}
+	});
+}
 
 
 function processData(allText) {
@@ -28,14 +41,14 @@ function processData(allText) {
 	console.log(headers);
 
 	// console.log(lines);
-	for (var i=1; i<allTextLines.length; i++) {
+	for (var i = 1; i < allTextLines.length; i++) {
 		var data = allTextLines[i].split('\t');
-		
+
 		// sert à éliminer les lignes vides 
-		if (data[0].length>3){	
+		if (data[0].length > 3) {
 			if (data.length == headers.length) {
 
-				
+
 				console.log('coucou');
 				console.log(data[2]);
 
@@ -59,7 +72,11 @@ function processData(allText) {
 
 			}
 
-			}
 		}
+	}
 
+}
+
+module.exports = {
+	readFile: readFile
 }
