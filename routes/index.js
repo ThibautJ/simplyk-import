@@ -11,26 +11,26 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/import_students', function(req, res) {
+router.post('/import_students', function(req, res) {
 	newAdmin = new Admin({
-		name: 'Ecole test 2',
+		name: 'school name',
 		type: 'school-coordinator',
-		lastName: 'last',
-		firstName: 'first',
+		lastname: 'Last',
+		firstname: 'First',
 		password: crypt.generateHash('15151515'),
-		email: 'test2@school.com'
+		email: 'test@school.com'
 	});
 	newAdmin.save(function(err, admin) {
 		if (err) {
 			console.log(err);
 			res.sendStatus(404).end();
 		} else {
-			reader.readFileAndCreateStudents('datas/' + req.query.path, 'utf8', admin._id, function(err, volunteers) {
+			reader.readFileAndCreateStudents('datas/' + req.body.path, 'utf8', admin._id, function(err, volunteers) {
 				if (err) {
 					console.log(err);
 					res.sendStatus(404).end();
 				} else {
-					console.log('Students creation finished OK with path ' + req.query.path);
+					console.log('Students creation finished OK with path ' + req.body.path);
 					console.log('admin._id : ' + admin._id);
 					console.log('volunteers : ' + volunteers);
 					Admin.findOneAndUpdate({
@@ -56,8 +56,16 @@ router.get('/import_students', function(req, res) {
 	})
 });
 
-router.get('/import_admins', function(req, res) {
-
+router.post('/import_admins', function(req, res) {
+	reader.readFileAndCreateAdmins('datas/' + req.body.path, 'utf8', function(err, nbAdmins) {
+		if (err) {
+			console.log(err);
+			res.sendStatus(404).end();
+		} else {
+			console.log('Admins creations is finished with ' + nbAdmins + ' created !');
+			res.sendStatus(200).end();
+		}
+	});
 });
 
 module.exports = router;

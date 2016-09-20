@@ -5,19 +5,29 @@ block content
 	.container-fluid
 		.row
 			div.col-md-5.col-md-1-offset
-				h2 Add a school
-				input#path(placeholder='folder/file name in datas folder')
-				a#execute.btn.btn-default Exécute script
+				h2 Add a school and its students
+				input#path-students(placeholder='folder/file name in datas folder')
+				a#execute-students.btn.btn-default Exécute script
+			div.col-md-5.col-md-1-offset
+				h2 Add the school's admins
+				input#path-admins(placeholder='folder/file name in datas folder')
+				a#execute-admins.btn.btn-default Exécute script
 
 block footscript
 	script.
 		$(document).ready(function(){
-			$('#execute').click(function(){
-				const path = $('#path').val();
-				console.log('Puet');
+			$('#execute-students').click(function(){
+				const path = $('#path-students').val();
 				console.log(Date.parse(' 2002-12-10'));
-				$.get('/import_students', {path: path}, function(){
-					console.log('IN GET with path : ' + path);
+				$.post('/import_students', {path: path}, function(){
+					console.log('IN post with path : ' + path);
+				});
+			});
+			$('#execute-admins').click(function(){
+				const path = $('#path-admins').val();
+				console.log(Date.parse('2002-12-10'));
+				$.post('/import_admins', {path: path}, function(){
+					console.log('IN post with path : ' + path);
 				});
 			});
 		});
