@@ -13,12 +13,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/import_students', function(req, res) {
 	newAdmin = new Admin({
-		name: 'school name',
+		name: '',
 		type: 'school-coordinator',
-		lastname: 'Last',
-		firstname: 'First',
-		password: crypt.generateHash('15151515'),
-		email: 'test@school.com'
+		lastname: '',
+		firstname: '',
+		password: crypt.generateHash(process.env.ADMIN_PASSWORD_CREATION_CODE),
+		email: ''
 	});
 	newAdmin.save(function(err, admin) {
 		if (err) {
