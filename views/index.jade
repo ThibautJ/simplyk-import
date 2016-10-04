@@ -12,6 +12,12 @@ block content
 				h2 Add the school's admins
 				input#path-admins(placeholder='folder/file name in datas folder')
 				a#execute-admins.btn.btn-default Exécute script
+		.row
+			div.col-md-5.col-md-1-offset
+				h2#tmm1 Update MongoDB
+				h6 With lib/update_mongo.js
+				h2#tmm2(hidden=true) Update MongoDB done
+				a#updateMongo.btn.btn-default Exécute script
 
 block footscript
 	script.
@@ -29,5 +35,14 @@ block footscript
 				$.post('/import_admins', {path: path}, function(){
 					console.log('IN post with path : ' + path);
 				});
+			});
+			$("#updateMongo").click(function () {
+				if (confirm('Are you sure to updateMongo')) {
+					$.post('/update_mongo').done(function(){
+						$("#tmm1").hide("slow");
+						$(this).hide("slow");
+						$("#tmm2").show("slow");
+					});
+				};
 			});
 		});
