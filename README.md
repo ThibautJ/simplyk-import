@@ -6,8 +6,6 @@ Students &amp; Employees Importation to Simplyk Platform
 2. Change admin creation informations in index.js
 
 ## To-do list before executing admins import
-1. Define environment variables
+1. Define environment variables (MONGO_DB_CREDENTIALS && ADMIN_PASSWORD_CREATION_CODE)
 2. Change admin creation informations in reader.js.processAdminsData
-3. If an admin has 2 different classes (for example 514 and 515):
-* admin.class = '514515'
-* student.class = '514515'
+3. If an admin has 2 different classes (for example 514 and 515): admin.class = '514515'
