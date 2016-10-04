@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var creator = require('../lib/creator.js');
 var reader = require('../lib/reader.js');
 var update_mongo = require('../lib/update_mongo.js');
 var Admin = require('../models/admin_model');
 var crypt = require('../auth/crypt.js');
+
+/////////////////////
+// TO DEFINE
+const school_name = '';
+/////////////////////
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -63,14 +69,22 @@ router.post('/import_admins', function(req, res) {
 			console.log(err);
 			res.sendStatus(404).end();
 		} else {
-			console.log('Admins creations is finished with ' + nbAdmins + ' created !');
-			res.sendStatus(200).end();
+			console.log('Admins creation is finished with ' + nbAdmins + ' created !');
+			creator.createOrgFromAdmin(school_name, function(err, nbOrgsCreated) {
+				if (err) {
+					console.log(err);
+					res.sendStatus(404).end();
+				} else {
+					console.log('Organisms (linked to admins) creation is finished with ' + nbOrgsCreated + ' created !');
+					res.sendStatus(200).end();
+				}
+			})
 		}
 	});
 });
 
-router.post('/update_mongo', function(req,res){
-	update_mongo.update(function(err){
+router.post('/update_mongo', function(req, res) {
+	update_mongo.update(function(err) {
 		if (err) {
 			console.log(err);
 			res.sendStatus(404).end();
